@@ -1,7 +1,7 @@
-const { DataTypes, NUMBER } = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 module.exports = sequelize => {
-    sequelize.define('types', {
+    sequelize.define("Type", {
         idTypes: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -13,4 +13,4 @@ module.exports = sequelize => {
             //an attempt to insert a name that already exists there will throw an Error
         }
     });
-}
+};

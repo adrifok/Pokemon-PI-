@@ -6,7 +6,7 @@ const router = Router();
 
 
 router.get('/', async (req,res) => {
-    let {name, by} = req.query;
+    let {name, el} = req.query;
     let pokemonList = [];
     if(name){
         name = name.toLowerCase();//asi evito que una busqueda hecha en mayusculas de error. llevo todo a minusculas.
@@ -16,7 +16,7 @@ router.get('/', async (req,res) => {
         return res.json(pokemonList);
     }
 
-    pokemonList = await info(by);
+    pokemonList = await info(el);
     if(!pokemonList.length) return res.json({message: 'No info found about the Pokemon you searched'});
     return res.json(pokemonList);
 });
@@ -44,8 +44,12 @@ router.post('/', async (req, res) =>{
         types
     } = req.body;
     if(
+              //el typeof de NAN es number
         isNaN(life) || isNaN(force) || isNaN(defense) || isNaN(speed) || isNaN(height) ||isNaN(weight))
     return res.json({message: 'this argument is not a number'});
+    
+    console.log(number.id)
+
     
     //el item name es obligatorio (allowNull: false)
     if(!name) return res.json({message: 'the item name is mandatory'});
