@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
+//const fetch = require('node-fetch'); 
 
 require('./db.js');
 
@@ -21,6 +22,10 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+
+server.get('/', (req, res)=>{ //prueba de primer GET al server con thunder client OK
+  res.json({info: 'GET OK'});
+})
 
 server.use('/', routes);
 

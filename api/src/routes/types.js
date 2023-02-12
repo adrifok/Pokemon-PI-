@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/', async (req, res) =>{
     //consulto a la api la informacion
-    const api = await fetch ('https://pokeapi.co/api/v2/type/3');
+    const api = await fetch ('https://pokeapi.co/api/v2/pokemon');
 
     const types= await api.json();
 
