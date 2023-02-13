@@ -15,6 +15,7 @@ module.exports = (sequelize) => {
     },
       idPoke: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         autoIncrement: true,
       
     },

@@ -1,9 +1,9 @@
 const Router = require('express');
-const {Pokemon, Type} = require('../db');
+const {Pokemon} = require('../db');
 
 const router = Router();
-//primer .get para obtener un listado de los pokemons desde la pokeapi
 
+//primer .get para obtener un listado de los pokemon desde la pokeapi OK
 
 router.get('/', async (req,res) => {
     let {name, el} = req.query;
@@ -24,7 +24,7 @@ router.get('/', async (req,res) => {
 //.get al id para obtener un pokemon especifico
 
 router.get('/:id', async (req, res) =>{
-    const {id} = req.params;cd      
+    const {id} = req.params;      
     let pokemonList = await forId(id);
     if(!pokemonList.id) return res.json({message: 'Pokemon NOT found'});
 return res.json(pokemonList);

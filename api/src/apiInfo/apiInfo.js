@@ -26,7 +26,7 @@ const infoFromApi = async (el) => {
 
       const pokemon = await fetch(dataBase[i].url);
       const infoFromApi = await pokemon.json(); //lo traigo en un json
-      return infoFromApi;
+      //return infoFromApi;
 
       //pusheo los datos y tipos que hay em mi base de datos
       const poke = await Pokemon.findAll({ include: Type });
@@ -45,7 +45,7 @@ const infoFromApi = async (el) => {
         include: Type,
       });
       if (myDb) {
-        const pokeDb = [
+        const pokeDb = [ //api es array de objetos
           {
             id: myDb.id,
             idPoke: myDb.idPoke,
@@ -57,7 +57,7 @@ const infoFromApi = async (el) => {
       } else {
         const api = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
         const data = await api.json();
-        const pokemonbyName = [
+        const pokemonbyName = [ 
           {
             id: data.id,
             name: data.name,
@@ -67,7 +67,7 @@ const infoFromApi = async (el) => {
         return pokeByName;
       }
     } catch (err) {
-      return [];
+      return []; //si hay error devuelve el array de objetos vacio
     }
   };
 
@@ -91,12 +91,13 @@ const infoFromApi = async (el) => {
 
       return pokemonById;
     } catch (err) {}
+
     try {
       const myDb = await Pokemon.findByPk(id, { include: Type });
       const pokemondB = {
         id: myDb.data,
         name: myDb.name,
-        type: myDb.types.map((t) => t.type.name),
+        type: myDb.types.map((t) => t.type.name),  //idTypes from Type model?????
         life: myDb.life,
         force: myDb.force,
         defense: myDb.defense,
