@@ -11,6 +11,7 @@ specifiers:
   react-router-dom: 6.4.3
   react-scripts: 4.0.3
   redux: 4.2.0
+  redux-devtools-extension: ^2.13.9
   redux-thunk: ^2.3.0
   web-vitals: ^2.1.4
 
@@ -25,6 +26,7 @@ dependencies:
   react-router-dom: 6.4.3_react-dom@18.2.0+react@18.2.0
   react-scripts: 4.0.3_react@18.2.0
   redux: 4.2.0
+  redux-devtools-extension: 2.13.9_redux@4.2.0
   redux-thunk: 2.4.2_redux@4.2.0
   web-vitals: 2.1.4
 
@@ -10976,6 +10978,15 @@ packages:
     dependencies:
       indent-string: 4.0.0
       strip-indent: 3.0.0
+    dev: false
+
+  /redux-devtools-extension/2.13.9_redux@4.2.0:
+    resolution: {integrity: sha512-cNJ8Q/EtjhQaZ71c8I9+BPySIBVEKssbPpskBfsXqb8HJ002A3KRVHfeRzwRo6mGPqsm7XuHTqNSNeS1Khig0A==}
+    deprecated: Package moved to @redux-devtools/extension.
+    peerDependencies:
+      redux: ^3.1.0 || ^4.0.0
+    dependencies:
+      redux: 4.2.0
     dev: false
 
   /redux-thunk/2.4.2_redux@4.2.0:

@@ -2,7 +2,7 @@
 const { Pokemon, Type } = require("../db");
 
 const infoFromApi = async (byType) => {
-  const api = await fetch("https://pokeapi.co/api/v2/pokemon?limit=60");
+  const api = await fetch("https://pokeapi.co/api/v2/pokemon?limit=40"); //busqueda limitada a 40
   const apiData = await api.json(); //data que obtengo de la poke api en un j.son
 
   const dB = await Pokemon.findAll({ include: Type }); //traigo info desde la base de datos(que incluya a los tipos)
