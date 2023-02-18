@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+//const fetch = require("node-fetch");
 const { Pokemon, Type } = require("../db");
 
 const infoFromApi = async (byType) => {

@@ -39,8 +39,8 @@ console.log(sequelize.models); //{ Pokemon: pokemon, Types: types }
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Pokemon.belongsToMany(Type, {through: 'pokemon_dB'});//association means that a Many-To-Many relationship exists between the 2 tables
-Type.belongsToMany(Pokemon, {through: 'pokemon_dB'});
+Pokemon.belongsToMany(Type, {through: 'pokemon_middleTable'});//association means that a Many-To-Many relationship exists between the 2 tables
+Type.belongsToMany(Pokemon, {through: 'pokemon_middleTable'});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

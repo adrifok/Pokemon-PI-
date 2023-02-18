@@ -12,11 +12,6 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID, //generate UUIDs automatically
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true, //Uniquely identifies each row/record in a database table
-    },
-      idPoke: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
       
     },
     life: {
