@@ -1,12 +1,12 @@
 const {Router} = require('express');
-//const fetch = require('node-fetch'); 
-const {Type} = require('../db');
+const fetch = require('node-fetch'); 
+const {Type} = require('../db.js');
 
 const router = Router();
 
 router.get('/', async (req, res) =>{
     //consulto a la api la informacion
-    const api = await fetch ('https://pokeapi.co/api/v2/pokemon');
+    const api = await fetch ('https://pokeapi.co/api/v2/type');
 
     const types= await api.json();
 

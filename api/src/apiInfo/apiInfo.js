@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const { Pokemon, Type } = require("../db");
 
-const infoFromApi = async (el) => {
+const infoFromApi = async (byType) => {
   const api = await fetch("https://pokeapi.co/api/v2/pokemon?limit=60");
   const apiData = await api.json(); //data que obtengo de la poke api en un j.son
 
@@ -9,9 +9,9 @@ const infoFromApi = async (el) => {
 
   var dataBase = [...dB, ...apiData.results]; //voy a guardar un array de info y resultados de mi Dbase y de la api
 
-  if (el === "2") {
+  if (byType === "2") {
     dataBase = [...dB];
-  } else if (el === "1") {
+  } else if (byType === "1") {
     dataBase = [...apiData.results];
   }
 
@@ -23,18 +23,35 @@ const infoFromApi = async (el) => {
       return pokemonInfo; //devuelvo toda la info
     if (dataBase[i].url) {
       //si encuentro la url de un pokemon especifico
-
       const pokemon = await fetch(dataBase[i].url);
       const infoFromApi = await pokemon.json(); //lo traigo en un json
       //return infoFromApi;
+      
+
+      pokemonInfo.push({    //al array de info le pusheo:
+        id: infoFromApi.id,
+        name: infoFromApi.name,
+        type: infoFromApi.types.map((t) => t.type.name),
+        force: infoFromApi.stats[1].base_stat,
+      });
+    } else {
+      pokemonInfo.push({
+        id: base[i].id,
+        idPoke: base[i].idPoke,
+        name: base[i].name,
+        type: base[i].types.map((t) => t.name),
+        force: base[i].force,
+      });
+    }
+  }
+
 
       //pusheo los datos y tipos que hay em mi base de datos
       const poke = await Pokemon.findAll({ include: Type });
       pokemonInfo.push({ ...poke });
-      //return pokemonInfo;
-    }
-    return dataBase;
-  }
+      return pokemonInfo;
+    };
+  
   //busqueda por nombre de Pokemon
   let pokeByName = async (name) => {
     try {
@@ -57,14 +74,14 @@ const infoFromApi = async (el) => {
       } else {
         const api = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
         const data = await api.json();
-        const pokemonbyName = [ 
+        const pokemonByName = [ 
           {
             id: data.id,
             name: data.name,
             type: data.types.map((t) => t.type.name),
           },
         ];
-        return pokeByName;
+        return pokemonByName;
       }
     } catch (err) {
       return []; //si hay error devuelve el array de objetos vacio
@@ -73,7 +90,7 @@ const infoFromApi = async (el) => {
 
   //busqueda por id de Pokemon
   const pokeById = async (id) => {
-    try {
+    try {   
       const api = await fetch("https://pokeapi.co/api/v2/pokemon/${id}");
       const data = await api.json();
 
@@ -81,21 +98,21 @@ const infoFromApi = async (el) => {
         id: data.id,
         name: data.name,
         type: data.types.map((t) => t.type.name),
-        life: data.life,
-        force: data.force,
-        defense: data.defense,
-        speed: data.speed,
+        life: data.stats[0].base_stat, //base stats means Species strengths
+        force: data.stats[1].base_stat,
+        defense: data.stats[2].base_stat,
+        speed: data.stats[3].base_stat,
         height: data.height,
         weight: data.weight,
       };
-
-      return pokemonById;
+      //return del objrto y sus propiedades
+      return pokemonById; 
     } catch (err) {}
 
     try {
       const myDb = await Pokemon.findByPk(id, { include: Type });
       const pokemondB = {
-        id: myDb.data,
+        id: myDb.idPoke,
         name: myDb.name,
         type: myDb.types.map((t) => t.type.name),  //idTypes from Type model?????
         life: myDb.life,
@@ -110,7 +127,7 @@ const infoFromApi = async (el) => {
       return {};
     }
   };
-};
+
 
 module.exports = {
   infoFromApi,

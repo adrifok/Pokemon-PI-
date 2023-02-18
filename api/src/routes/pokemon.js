@@ -1,22 +1,25 @@
 const Router = require('express');
-const {Pokemon} = require('../db');
+const {Pokemon, Type} = require('../db');
+const {infoFromApi,
+    pokeByName,
+    pokeById,} = require('../apiInfo/apiInfo.js')
 
 const router = Router();
 
 //primer .get para obtener un listado de los pokemon desde la pokeapi OK
 
 router.get('/', async (req,res) => {
-    let {name, el} = req.query;
+    let {name, byType} = req.query;
     let pokemonList = [];
     if(name){
         name = name.toLowerCase();//asi evito que una busqueda hecha en mayusculas de error. llevo todo a minusculas.
-        pokemonList = await forName(name);
+        pokemonList = await pokeByName(name);
         if(!pokemonList.length) return 
         res.json({message: 'Pokemon NOT found'});
         return res.json(pokemonList);
     }
 
-    pokemonList = await info(el);
+    pokemonList = await infoFromApi(byType);
     if(!pokemonList.length) return res.json({message: 'No info found about the Pokemon you searched'});
     return res.json(pokemonList);
 });
@@ -25,7 +28,7 @@ router.get('/', async (req,res) => {
 
 router.get('/:id', async (req, res) =>{
     const {id} = req.params;      
-    let pokemonList = await forId(id);
+    let pokemonList = await pokeById(id);
     if(!pokemonList.id) return res.json({message: 'Pokemon NOT found'});
 return res.json(pokemonList);
 });
@@ -52,7 +55,7 @@ router.post('/', async (req, res) =>{
 
     
     //el item name es obligatorio (allowNull: false)
-    if(!name) return res.json({message: 'the item name is mandatory'});
+    if(!name) return res.json({message: 'the item "name" is mandatory'});
 
    //variable para declarar un pokemon que ya fue creado por otro usuario
     let duplicatedPokemon = await Pokemon.findOne({where: {name : name}});
