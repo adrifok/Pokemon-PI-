@@ -46,11 +46,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         order: action.payload,
       };
-    case "add":
+    case "addPokemon":
       if(state.team.lenght === 8) state.team.shift();
       return {
         ...state,
         team:[...state.team,action.payload] 
+      };
+      case "deletePokemon":
+      return {
+        ...state,
+        order: action.payload,
       };
     default:
       return state;
