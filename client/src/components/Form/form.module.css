@@ -7,3 +7,30 @@
     background-image: url("./pokebola-pokemon.jpg");
     background-size: cover;
   }
+
+label{}
+
+  .form {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 30px 25px;
+    background-color: #f2f2f2;
+    border-radius: 40px;
+    margin-top: 80px;
+  }
+
+  .separate{}
+
+  .types{}
+
+  .types label{}
+
+  .hiddenCB div{}
+
+  .question{}
+
+  .danger{}
+  
+  .submit{}
