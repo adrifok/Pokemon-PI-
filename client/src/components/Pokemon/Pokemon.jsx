@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import style from "./pokemon.module.css";
-import Stats from "../Stats";
+import Stats from "../Stats/Stats";
 
 export const Pokemon = () => {
   const { id } = useParams();
@@ -26,14 +26,14 @@ export const Pokemon = () => {
 
   useEffect(() => {
     detailsById();
-  }, []);
+  });
 
   const detailsById = async () => {
     const data = await fetch(`http://localhost:3001/pokemon/${id}`);
 
     const pokemon = await data.json();
     setPokemon(pokemon);
-  };
+  //};
 
   return (
     <>
@@ -85,4 +85,5 @@ export const Pokemon = () => {
       </div>
     </>
   );
+}
 };

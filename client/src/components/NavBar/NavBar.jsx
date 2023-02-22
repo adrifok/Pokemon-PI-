@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import style from "./navbar.module.css";
 
-export const Navbar = () =>{
+export const NavBar = () =>{
     return (
         <div>
             <header className={style.header}>

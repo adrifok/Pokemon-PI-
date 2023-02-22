@@ -10,6 +10,7 @@ const initialState = {
   team: [],
 };
 
+//console.log(store.getState())
 const rootReducer = (state = initialState, action) => {
   //actions only tell what to do: reducers take the current state and action and return the new state 
 
@@ -61,5 +62,6 @@ const rootReducer = (state = initialState, action) => {
       return state;
   }
 };
+//console.log(store.getState())
 
 export default rootReducer;

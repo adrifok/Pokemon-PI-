@@ -19,6 +19,7 @@ export const getPokemons = () => async (dispatch) => {
   });
 };
 
+
 export const getByName = (name) => async (dispatch) => {
   const response = await fetch(
     `http://localhost:3000/pokemons?name=${name}`
@@ -26,7 +27,7 @@ export const getByName = (name) => async (dispatch) => {
   const data = await response.json();
   dispatch({
     type: "get_name",
-    payload: data.name,
+    payload: data,
   });
 };
 
@@ -53,12 +54,12 @@ export const order = (order) => (dispatch) => {
   });
 };
 
-// export const add = (pokemon) => (dispatch) => {
-//   dispatch({
-//     type: "addPokemon",
-//     payload: pokemon,
-//   });
-// };
+export const add = (pokemon) => (dispatch) => {
+  dispatch({
+    type: "addPokemon",
+    payload: pokemon,
+  });
+};
 // export const deletePokemon = (id) => async (dispatch) =>{
 //   const response = await fetch(`http://localhost:3000/pokemons/${id}`);
 //   const data = await response.json();
@@ -66,4 +67,4 @@ export const order = (order) => (dispatch) => {
 //     type: "deletePokemon",
 //     payload: pokemon,
 //  });
-//};
+// };

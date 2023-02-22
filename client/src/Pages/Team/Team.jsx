@@ -10,7 +10,7 @@ export const Team = () => {
       array = JSON.parse(array); //convert to a json object
       return array;
     }
-    return []
+    return [];
   };
 
   const array = team();

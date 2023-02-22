@@ -29,10 +29,10 @@ export const Form = () => {
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
-    if (e.target.name != "name") {
+    if (e.target.name !== "name") {
       setData({
         ...data,
-        [e.target.name]: Number(e.target, value) <= 0 ? 0 : e.target.value,
+        [e.target.name]: Number(e.target.value) <= 0 ? 0 : e.target.value,
       });
     } else {
       setErrors(
@@ -97,7 +97,7 @@ export const Form = () => {
             <label>Pokemon Name</label>
             <input
               type="text"
-              placeholder="Ditto"
+              placeholder="Ditto..."
               name="name"
               value={data.name}
               onChange={handleInputChange} //// console.log(event.name)
@@ -119,7 +119,7 @@ export const Form = () => {
             <input
               type="number"
               name="force"
-              value={data.forcr}
+              value={data.force}
               onChange={handleInputChange}
             />
           </p>

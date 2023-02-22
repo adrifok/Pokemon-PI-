@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import style from "./search.module.css";
+import style from "./searchbar.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { filters, getByName, order, type } from "../../actions";
 
-export const Search = () => {
+
+export const SearchBar = () => {
   const dispatch = useDispatch();
   const [pokemons, setPokemons] = useState("");
 
@@ -71,3 +72,4 @@ export const Search = () => {
     </div>
   );
 };
+
