@@ -46,7 +46,7 @@ export const Details = () => {
           Next &raquo;
         </button>
       </div>
-      <Card array={array} img={"https://www.icegif.com/wp-content/uploads/2022/08/icegif-1160.gif"} />
+      <Card array={array} img={"https://media.tenor.com/FjvyyCwzuEQAAAAi/pikachu-happy.gif"} />
     </div>
   );
 };

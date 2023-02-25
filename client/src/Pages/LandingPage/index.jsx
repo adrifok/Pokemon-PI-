@@ -8,17 +8,17 @@ export const LandingPage = () => {
     <div className={style.container}>
       <div>
         <h1>
-          <span>The fastest way </span> to get your 
-          <span> POKEMON</span>
+            The fastest way  to get your POKEMON
         </h1>
-        <p>
+        <span>
           Welcome to The Pokemon Database! 
-          On this page below you'll find the recent Pokemon news and updates
-          
-        </p>
+          <p>
+          On this page below you'll find the recent Pokemon News and Updates
+          </p>
       <div>
         <img src="./gameboy.png" alt="" />
       </div>
+          </span>
         <Link to="/home">
           <input
             type="submit"

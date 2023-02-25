@@ -1,5 +1,5 @@
 //configuracion de react router dom:
-import { Switch, Route, useLocation, Link } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { LandingPage } from "./Pages/LandingPage/index";
