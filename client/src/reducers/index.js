@@ -1,6 +1,7 @@
 //configuro un estado inicial con un a fn que no se modificara (initialState)
 //los reducers devuelven un nuevo estado sin modificar el actual
 //devuelven una nueva instancia (update) del estado inicial
+//el reducer es una funcion
 
 const initialState = {
   types: [],
@@ -15,6 +16,7 @@ const rootReducer = (state = initialState, action) => {
   //actions only tell what to do: reducers take the current state and action and return the new state 
 
   //otra opcion es armarlos con'if'
+  //if(action.type === "get_type"){return {types:[...state.types.,action.payload]}};
   switch (action.type) {
     case "get_type":
       return {

@@ -4,17 +4,17 @@ import style from "./navbar.module.css";
 
 export const NavBar = () =>{
     return (
-        <div>
+        <nav>
             <header className={style.header}>
                 <Link to="/" className={style.logo}>
                     <img src="./logoconbg-01.png" alt=""/>
                 </Link>
                 <ul>
-                    <li><Link to="/home">POKEMON</Link> </li>
-                    <li><Link to="/create">Create</Link> </li>
-                    <li><Link to="/team">My Team</Link> </li>                
+                    <p><Link to="/home">POKEMON</Link> </p>
+                    <p><Link to="/create">Create</Link> </p>
+                    <p><Link to="/team">My Team</Link> </p>                
                 </ul>
             </header>
-        </div>
+        </nav>
     );
 };

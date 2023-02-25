@@ -13,7 +13,7 @@ export const Pokemon = () => {
     let array = [];
     if (localStorage.getItem("team")) {
       array = localStorage.getItem("team");
-      array = JSON.parse(array);
+      array = JSON.parse(array);  
       if (array.length >= 8) array.shift();
       array.push(obj);
       localStorage.setItem("team", JSON.stringify(array));
@@ -25,11 +25,12 @@ export const Pokemon = () => {
   };
 
   useEffect(() => {
+    //console.log("entra")
     detailsById();
   });
 
   const detailsById = async () => {
-    const data = await fetch(`http://localhost:3001/pokemon/${id}`);
+    const data = await fetch(`http://localhost:3000/pokemons/${id}`);
 
     const pokemon = await data.json();
     setPokemon(pokemon);

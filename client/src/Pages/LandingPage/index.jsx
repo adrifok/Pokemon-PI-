@@ -8,18 +8,21 @@ export const LandingPage = () => {
     <div className={style.container}>
       <div>
         <h1>
-          <span>The fastest way</span>to get<br>your </br>
-          <span>POKEMON</span>
+          <span>The fastest way </span> to get your 
+          <span> POKEMON</span>
         </h1>
         <p>
-          Welcome to The Pokemon Database! <br />
+          Welcome to The Pokemon Database! 
           On this page below you'll find the recent Pokemon news and updates
-          <br />
+          
         </p>
+      <div>
+        <img src="./gameboy.png" alt="" />
+      </div>
         <Link to="/home">
           <input
             type="submit"
-            value="Welcome Pokefan"
+            value="Welcome PokeFan"
             className={style.myButton}
             />
         </Link>
@@ -28,9 +31,6 @@ export const LandingPage = () => {
         </h3>
       </div>
 
-      <div>
-        <img src="img/LandingPage/landingpage.jpg" alt="" />
-      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../actions/";
 import style from "./form.module.css";
+//import {connect} from "react-redux"
 
 export const Form = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ export const Form = () => {
         ...data,
         types: [...data.types, e.target.value],
       });
-    }
+    } 
   };
 
   const submit = async (e) => {

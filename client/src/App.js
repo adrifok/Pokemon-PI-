@@ -1,5 +1,5 @@
 //configuracion de react router dom:
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route, useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { LandingPage } from "./Pages/LandingPage/index";
@@ -41,13 +41,14 @@ export default function App() {
     //export default App;
     
     <div className="App">
-      {pathname !== "/" && <NavBar />}
+      {pathname !== "/" && <NavBar/>}
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/home" component={Details} />
         <Route exact path="/pokemon/:id" component={Pokemon} />
         <Route exact path="/create" component={Create} />
         <Route exact path="/team" component={Team} />
+    
       </Switch>
     </div>
   );

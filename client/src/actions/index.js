@@ -1,10 +1,15 @@
+//import rootReducer from ("../reducers/index"); 
+//import {getTypes,getPokemons,getByName,add,type,filters,order, deletePokemons} from "./index"
+
+
+
 export const getTypes = () => async (dispatch) => {
   const response = await fetch("http://localhost:3000/types");
-  console.log(response);
+  //console.log(response);
   const data = await response.json();
   console.log(data);
 
-  dispatch({
+  dispatch({ 
     type: "get_type",
     payload: data,
   });
@@ -17,6 +22,7 @@ export const getPokemons = () => async (dispatch) => {
     type: "get_pokemons",
     payload: data,
   });
+  console.log(data)
 };
 
 
@@ -65,6 +71,6 @@ export const add = (pokemon) => (dispatch) => {
 //   const data = await response.json();
 //  dispatch({
 //     type: "deletePokemon",
-//     payload: pokemon,
+//     payload: id,
 //  });
 // };
