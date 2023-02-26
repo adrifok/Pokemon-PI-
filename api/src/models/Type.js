@@ -11,6 +11,8 @@ module.exports = sequelize => {
             type: DataTypes.STRING,
             unique: true,
             //an attempt to insert a name that already exists there will throw an Error
-        }
-    });
+        },
+    },
+    {timestamps: false}
+);
 };

@@ -6,17 +6,18 @@ module.exports = (sequelize) => {
   sequelize.define("Pokemon", {
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false, //campo obligatorio
     },
     id: {
       type: DataTypes.UUID, //generate UUIDs automatically
       defaultValue: DataTypes.UUIDV4,
+      allownull:false, //campo obligatorio
       primaryKey: true, //Uniquely identifies each row/record in a database table
       
     },
     life: {
       type: DataTypes.INTEGER,
-      allowNull: false, //campo obligatorio
+    
     },
     force: {
       type: DataTypes.INTEGER,
@@ -32,6 +33,8 @@ module.exports = (sequelize) => {
     },
     weight:{
       type: DataTypes.DECIMAL,
-    }
-  });
+    },
+  },
+  {timestamps : false}
+  );
 };

@@ -1,4 +1,4 @@
-//const fetch = require("node-fetch");
+
 const { Pokemon, Type } = require("../db");
 
 const infoFromApi = async (byType) => {
@@ -9,42 +9,40 @@ const infoFromApi = async (byType) => {
 
   var dataBase = [...dB, ...apiData.results]; //voy a guardar un array de info y resultados de mi Dbase y de la api
 
-  if (byType === "2") {
+  if (byType === "2") {//pasa solo data de la base de datos local
     dataBase = [...dB];
-  } else if (byType === "1") {
-    dataBase = [...apiData.results];
+  } else if (byType === "1") {   //pasa solo data de la API
+    dataBase = [...apiData.results];//si no mergea data the las dos fuentes
   }
 
-  var pokemonInfo = [];
+  let pokemonInfo = [];
   for (let i = 0; i < array.length; i++) {
-    //recorro el array
-    if (!dataBase[i])
-      //si no existe la base de datos en la pos i
-      return pokemonInfo; //devuelvo toda la info
-    if (dataBase[i].url) {
+    //recorro el array   
+    if (dataBase[i].url) {//chequeo si existe una url en la API
       //si encuentro la url de un pokemon especifico
       const pokemon = await fetch(dataBase[i].url);
       const infoFromApi = await pokemon.json(); //lo traigo en un json
       //return infoFromApi;
       
 
-      pokemonInfo.push({    //al array de info le pusheo:
+      pokemonInfo.push({    //al array de info le pusheo la data de la pokeApi
         id: infoFromApi.id,
         name: infoFromApi.name,
         type: infoFromApi.types.map((t) => t.type.name),
+        img: infoFromApi.sprites.versions["generation-v"]["black-white"].animated.front_default,
         force: infoFromApi.stats[1].base_stat,
       });
     } else {
       pokemonInfo.push({
-        id: base[i].id,
-        idPoke: base[i].idPoke,
-        name: base[i].name,
-        type: base[i].types.map((t) => t.name),
-        force: base[i].force,
+        id: dB[i].id,
+        idPoke: dB[i].idPoke,
+        name: dB[i].name,
+        type: dB[i].types.map((t) => t.name),
+        force: dB[i].force,
+        img: "https://media.tenor.com/BjyNZZIOnbYAAAAC/pokemon.gif",
       });
     }
   }
-
 
       //pusheo los datos y tipos que hay em mi base de datos
       const poke = await Pokemon.findAll({ include: Type });
@@ -53,21 +51,22 @@ const infoFromApi = async (byType) => {
     };
   
   //busqueda por nombre de Pokemon
-  let pokeByName = async (name) => {
+  const pokeByName = async (name) => {
     try {
-      const myDb = await Pokemon.findOne({
+      const myDb = await Pokemon.findOne({//busco en la db local
         where: {
           name: name,
         },
         include: Type,
       });
       if (myDb) {
-        const pokeDb = [ //api es array de objetos
+        const pokeDb = [ //si no busco en la pokeApi (api es array de objetos)
           {
             id: myDb.id,
             idPoke: myDb.idPoke,
             name: myDb.name,
             type: myDb.types.map((t) => t.name),
+            img: "https://media.tenor.com/BjyNZZIOnbYAAAAC/pokemon.gif"
           },
         ];
         return pokeDb;
@@ -84,20 +83,21 @@ const infoFromApi = async (byType) => {
         return pokemonByName;
       }
     } catch (err) {
-      return []; //si hay error devuelve el array de objetos vacio
+      return []; //si hay no encuentro datos devuelvo el array de objetos vacio
     }
   };
 
   //busqueda por id de Pokemon
-  const pokeById = async (id) => {
+  const pokeById = async (id) => {//busco en la pokeApi por id
     try {   
-      const api = await fetch("https://pokeapi.co/api/v2/pokemon/${id}");
+      const api = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
       const data = await api.json();
 
-      const pokemonById = {
+      const pokemonById = {//creo un objeto Pokemon con sus caracteristicas
         id: data.id,
         name: data.name,
-        type: data.types.map((t) => t.type.name),
+        types: data.types.map((t) => t.type.name),
+        img: "https://media.tenor.com/BjyNZZIOnbYAAAAC/pokemon.gif",
         life: data.stats[0].base_stat, //base stats means Species strengths
         force: data.stats[1].base_stat,
         defense: data.stats[2].base_stat,
@@ -105,9 +105,10 @@ const infoFromApi = async (byType) => {
         height: data.height,
         weight: data.weight,
       };
-      //return del objrto y sus propiedades
-      return pokemonById; 
-    } catch (err) {}
+      //return del objeto y sus propiedades
+      return pokemonById; //devuelvo el objeto creado
+    } catch (err) {
+    }
 
     try {
       const myDb = await Pokemon.findByPk(id, { include: Type });
@@ -115,6 +116,7 @@ const infoFromApi = async (byType) => {
         id: myDb.idPoke,
         name: myDb.name,
         type: myDb.types.map((t) => t.type.name),  //idTypes from Type model?????
+        img: "https://media.giphy.com/media/DRfu7BT8ZK1uo/giphy.gif",
         life: myDb.life,
         force: myDb.force,
         defense: myDb.defense,

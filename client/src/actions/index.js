@@ -49,7 +49,7 @@ export const filters = (type) => async (dispatch) => {
   const data = await response.json();
   dispatch({
     type: "get_byFilter",
-    payload: data.type,
+    payload: data,
   });
 };
 
@@ -73,9 +73,10 @@ export const add = (pokemon) => (dispatch) => {
     payload: pokemon,
   });
 };
- export const deleteThePokemon = (id) => async (dispatch) =>{
- await fetch(`http://localhost:3000/pokemons/${id}`);
- return dispatch({
+
+export const deleteThePokemon = (id) => async (dispatch) =>{
+  await fetch(`http://localhost:3000/pokemons/${id}`, { method: 'DELETE' });
+  dispatch({
     type: "deletePokemon"
- });
+  });
 };
