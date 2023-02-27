@@ -30,7 +30,7 @@ export const Pokemon = () => {
   });
 
   const detailsById = async () => {
-    const data = await fetch(`http://localhost:3000/pokemons/${id}`);
+    const data = await fetch(`http://localhost:3001/pokemons/${id}`);
 
     const pokemon = await data.json();
     setPokemon(pokemon);

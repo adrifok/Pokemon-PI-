@@ -71,7 +71,7 @@ const infoFromApi = async (byType) => {
         ];
         return pokeDb;
       } else {
-        const api = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+        const api = await fetch(`https://poke  api.co/api/v2/pokemon/${name}`);
         const data = await api.json();
         const pokemonByName = [ 
           {

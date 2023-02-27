@@ -1,7 +1,7 @@
 const Router = require("express");
 const { Pokemon } = require("../db");
 const { infoFromApi, pokeByName, pokeById } = require("../apiInfo/apiInfo.js");
-
+//const fetch = require('node-fetch');
 const router = Router();
 
 //primer .get para obtener un listado de los pokemon desde la pokeapi OK
@@ -9,7 +9,7 @@ const router = Router();
 // router.get("/", async (req, res) => {
 //   try {
 //     let { name, byType } = req.query;
-//     let pokemonList = [];
+  //  let pokemonList = [];
 //     if (name) {
 //       name = name.toLowerCase(); //asi evito que una busqueda hecha en mayusculas x error. 
 //                            //llevo todo a minusculas.Case sensitivity

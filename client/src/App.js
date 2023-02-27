@@ -1,14 +1,17 @@
 //configuracion de react router dom:
 import { Switch, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import { LandingPage } from "./Pages/LandingPage/index";
 import { Details } from "./Pages/Details/Details.jsx";
 import { Create } from "./Pages/Create/Create.jsx";
 import { Team } from "./Pages/Team/Team.jsx";
 import { Pokemon } from "./components/Pokemon/Pokemon.jsx";
 import { NavBar } from "./components/NavBar/NavBar.jsx";
+//import { Cards } from "./components/Cards/Card";
+//import { Form } from "./components/Form/Form";
 import { getTypes, getPokemons } from "./actions";
+
 
 export default function App() {
   const { pathname } = useLocation();

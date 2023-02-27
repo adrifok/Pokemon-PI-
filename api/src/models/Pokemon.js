@@ -7,6 +7,8 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false, //campo obligatorio
+      unique:true,
+      validate:{len:[1,40]},
     },
     id: {
       type: DataTypes.UUID, //generate UUIDs automatically
