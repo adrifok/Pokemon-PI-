@@ -1,12 +1,12 @@
 //import rootReducer from ("../reducers/index"); 
-export const get_type ="get_type";
-export const getThePokemons ="getThePokemons";
-export const get_name ="get_name";
-export const get_byFilter ="get_byFilter";
-export const get_byType = "get_byType"
-export const get_inOrder ="get_inOrder";
-export const addPokemon ="addPokemon";
-export const deletePokemon ="deletePokemon";
+export const get_type ="get_type";//representa el tipo de acción para recuperar tipos de Pokémon especificos
+export const getThePokemons ="getThePokemons";//trae todos los pokemons
+export const get_name ="get_name";//trae todos los pokemons por nombre
+export const get_byFilter ="get_byFilter";//trae todos los pokemons
+export const get_byType = "get_byType"//trae todos los pokemons en una lista filtrada
+export const get_inOrder ="get_inOrder";//trae los pokemons pen order
+export const addPokemon ="addPokemon";//agrega un pokemon a la lista
+export const deletePokemon ="deletePokemon";//elimina
 
 export const getTypes = () => {return async (dispatch) => {
   const response = await fetch("http://localhost:3000/types");

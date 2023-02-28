@@ -25,9 +25,9 @@ server.use((req, res, next) => {
   next();
 });
 
-server.get('/', (req, res)=>{ //prueba de primer GET al server con thunder client OK
-  res.json({info: 'GET OK'});
-})
+// server.get('/', (req, res)=>{ //prueba de primer GET al server con thunder client OK
+//   res.json({info: 'GET OK'});
+// })
 
 server.use('/', routes);
 

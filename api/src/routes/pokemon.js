@@ -2,47 +2,61 @@ const Router = require("express");
 const { Pokemon } = require("../db");
 const { infoFromApi, pokeByName, pokeById } = require("../apiInfo/apiInfo.js");
 //const fetch = require('node-fetch');
-const router = Router();
+const router = Router(); 
 
 //primer .get para obtener un listado de los pokemon desde la pokeapi OK
 
+router.get("/", async (req, res) => {
+  try {
+    let { name} = req.query;
+   let pokemonList = [];
+    if (name) {
+      name = name.toLowerCase(); //asi evito que una busqueda hecha en mayusculas x error. 
+                           //llevo todo a minusculas.Case sensitivity
+      pokemonList = await pokeByName(name);
+      if (!pokemonList.length){ 
+        throw new Error( "Pokemon NOT found" )}
+
+      return res.status(200).json(pokemonList);//devuelve una lista con matching pokemons
+    }
+    else {
+      pokemonList = await fetch("https://pokeapi.co/api/v2/pokemon?limit=40") 
+      };
+
+
+    pokemonList = await infoFromApi(byType);
+    if (!pokemonList.length)
+      return res.json({
+        message: "No info found about the Pokemon you searched",
+      });
+    return res.status(201).json(pokemonList);//devuelve una lista con matching pokemons
+  } catch (error) {
+    res.status(404).json({ error: error.message });
+  }
+});
 // router.get("/", async (req, res) => {
 //   try {
-//     let { name, byType } = req.query;
-  //  let pokemonList = [];
-//     if (name) {
-//       name = name.toLowerCase(); //asi evito que una busqueda hecha en mayusculas x error. 
-//                            //llevo todo a minusculas.Case sensitivity
-//       pokemonList = await pokeByName(name);
-//       if (!pokemonList.length){ 
-//         return res.json({ message: "Pokemon NOT found" })}
-//       return res.status(200).json(pokemonList);//devuelve una lista con matching pokemons
+//     const { name } = req.query;
+//     const pokemonList = await pokeById(name);
+//     const apiPokemon = await infoFromApi(name);
+//     if (!name) {
+//       return res.status(400).json({ message: " Sorry!...There are no Pokemons" });
 //     }
 
-
-//     pokemonList = await infoFromApi(byType);
-//     if (!pokemonList.length)
-//       return res.json({
-//         message: "No info found about the Pokemon you searched",
-//       });
-//     return res.status(201).json(pokemonList);//devuelve una lista con matching pokemons
+//     if (!pokemonList && !pokeById) {throw Error("No Pokemon found" );
+//     }
+//     const infoTotal = pokemonList.concat(apiPokemon);
+//     res.status(200).send(infoTotal);
 //   } catch (error) {
-//     res.status(404).json({ error: error.message });
+//     res.status(404).send(" Sorry!...There are no Pokemons");
 //   }
 // });
-router.get("/", async (req, res) => {
-    try {
-      const { name } = req.query;
-      if (!name) return res.status(400).json({ message: "Name parameter is required" });
-  
-      const pokemonList = await pokeByName(name.toLowerCase());
-      if (!pokemonList.length) return res.status(404).json({ message: "No Pokemon found" });
-  
-      return res.status(200).json(pokemonList);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
+//     return res.status(200).json(pokemonList);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
   
   router.get("/type", async (req, res) => {
     try {
