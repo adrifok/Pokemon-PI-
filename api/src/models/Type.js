@@ -1,18 +1,14 @@
 const { DataTypes } = require('sequelize');
-
-module.exports = sequelize => {
-    sequelize.define("Type", {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        name: {
-            type: DataTypes.STRING,
-            unique: true,
-            //an attempt to insert a name that already exists there will throw an Error
-        },
-    },
-    {timestamps: false}
-);
+// Exportamos una funcion que define el modelo
+// Luego le injectamos la conexion a sequelize.
+module.exports = (sequelize) => {
+  // defino el modelo
+  sequelize.define('type', {
+    name: {
+      type: DataTypes.STRING
+  },
+}, {
+  createdAt: false,
+  updatedAt: false,
+})
 };

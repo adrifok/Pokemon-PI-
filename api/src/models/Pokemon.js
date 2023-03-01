@@ -1,42 +1,47 @@
-const {  DataTypes } = require("sequelize");
+const { DataTypes } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define("Pokemon", {
+  sequelize.define('pokemon', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
+    },
     name: {
       type: DataTypes.STRING,
-      allowNull: false, //campo obligatorio
-      unique:true,
-      validate:{len:[1,40]},
+      allowNull: false,
     },
-    id: {
-      type: DataTypes.UUID, //generate UUIDs automatically
-      defaultValue: DataTypes.UUIDV4,
-      allownull:false, //campo obligatorio
-      primaryKey: true, //Uniquely identifies each row/record in a database table
-      
+    hp: {
+      type: DataTypes.STRING,
     },
-    life: {
-      type: DataTypes.INTEGER,
-    
-    },
-    force: {
-      type: DataTypes.INTEGER,
+    attack: {
+      type: DataTypes.STRING,
     },
     defense: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     speed: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     height: {
-      type: DataTypes.DECIMAL, // DECIMAL(10,2)
+      type: DataTypes.STRING,
     },
-    weight:{
-      type: DataTypes.DECIMAL,
+    weight: {
+      type: DataTypes.STRING,
     },
-  },
-  {timestamps : false}
-  );
+    img: {
+      type: DataTypes.STRING,
+    },
+    createdInBd: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
+  }, {
+    createdAt: false,
+    updatedAt: false,
+  })
 };

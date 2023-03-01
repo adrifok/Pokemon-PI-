@@ -1,82 +1,145 @@
-//import rootReducer from ("../reducers/index"); 
-export const get_type ="get_type";//representa el tipo de acción para recuperar tipos de Pokémon especificos
-export const getThePokemons ="getThePokemons";//trae todos los pokemons
-export const get_name ="get_name";//trae todos los pokemons por nombre
-export const get_byFilter ="get_byFilter";//trae todos los pokemons
-export const get_byType = "get_byType"//trae todos los pokemons en una lista filtrada
-export const get_inOrder ="get_inOrder";//trae los pokemons pen order
-export const addPokemon ="addPokemon";//agrega un pokemon a la lista
-export const deletePokemon ="deletePokemon";//elimina
+import axios from 'axios';
 
-export const getTypes = () => {return async (dispatch) => {
-  const response = await fetch("http://localhost:3000/types");
-  //console.log(response);
-  const data = await response.json();
-  console.log(data);
-
-  dispatch({ 
-    type: get_type,
-    payload: response.data,
-  });
-};
-};
-
-export const getPokemons = () => async (dispatch) => {
-  const response = await fetch(`http://localhost:3000/pokemons`);
-  const data = await response.json();
-  dispatch({
-    type: "getThePokemons",
-    payload: response.data,
-  });
-  console.log(data)
-};
+export const GET_POKEMONS = 'GET_POKEMONS';
+export const GET_ALL_TYPES = 'GET_ALL_TYPES';
+export const FILTER_CREATED = 'FILTER_CREATED';
+export const ORDER_NAME = 'ORDER_NAME';
+export const FILTER_TYPE = 'FILTER_TYPE';
+export const ORDER_STR = 'FILTER_STR';
+export const GET_POKEMON_NAME = 'GET_POKEMON_NAME';
+export const POST_POKEMON = 'POST_POKEMON';
+export const GET_DETAILS = 'GET_DETAILS';
+export const CLEAN_DETAIL = 'CLEAN_DETAIL';
+export const CLEAN_POKEMONS = 'CLEAN_POKEMONS';
 
 
-export const getByName = (name) => {return async (dispatch) => {
-  const response = await fetch(
-    `http://localhost:3000/pokemons?name=${name}`
-  );
-  const data = await response.json();
-  dispatch({
-    type: "get_name",
-    payload:data.name,
-  });
-};
-};
-
-export const filters = (type) => async (dispatch) => {
-  const response = await fetch(`http://localhost:3000/pokemons/${type}`);
-  const data = await response.json();
-  dispatch({
-    type: "get_byFilter",
-    payload: data,
-  });
+export const getPokemons = () => {
+    return async (dispatch) => {
+        try {
+            let url = 'http://localhost:3001/pokemons';
+            let json = await axios.get(url);
+            return dispatch({
+                type: GET_POKEMONS,
+                payload: json.data
+            });
+        } catch (e) {
+            console.log(e);
+        };     
+    };
 };
 
-export const type = (type) => (dispatch) => {
-  dispatch({
-    type: "get_byType",
-    payload: type,
-  });
+export const cleanPokemons = (dispatch) => {
+    return dispatch({
+        type: CLEAN_POKEMONS,
+        payload: []
+    })
 };
 
-export const order = (order) => (dispatch) => {
-  dispatch({
-    type: "get_inOrder",
-    payload: order,
-  });
+
+export const getAlltypes = () => {
+    return async (dispatch) => {
+        try {
+            let url = 'http://localhost:3001/types';
+            let json = await axios.get(url);
+            return dispatch({
+                type: GET_ALL_TYPES,
+                payload: json.data
+            });
+        } catch (e) {
+          console.log(e);  
+        };
+    };
 };
 
-export const add = (pokemon) => (dispatch) => {
-  dispatch({
-    type: "addPokemon",
-    payload: pokemon,
-  });
+export const filterCreated = (payload) => {
+    return {
+        type: FILTER_CREATED,
+        payload
+    };
 };
 
-export const deleteThePokemon = (id) => async (dispatch) =>{
-  await fetch(`http://localhost:3000/pokemons/${id}`, { method: 'DELETE' });
-  dispatch({
-    type: "deletePokemon"
-  });
+export const orderName = (payload) => {
+    return {
+        type: ORDER_NAME,
+        payload
+    };
 };
+
+export const filterType = (payload) => {
+    return {
+        type: FILTER_TYPE,
+        payload
+    };
+};
+
+export const filterStr = (payload) => {
+    return {
+        type: ORDER_STR,
+        payload
+    }
+}
+
+export const getPokemonByName = (name) => {
+    return async (dispatch) => {
+        try {
+            var json = await axios.get(`http://localhost:3001/pokemons?name=${name}`)
+            return dispatch({
+                type: GET_POKEMON_NAME,
+                payload: json.data
+            })
+        } catch (e) {
+            alert('Pokemon not found');
+            window.location.href = "http://localhost:3000/home";
+            console.log(e);
+        };
+    };    
+};
+
+export const getDetail = (id) => {
+    return async (dispatch) => {
+        try{
+            var json = await axios.get(`http://localhost:3001/pokemons/${id}`);
+            return dispatch({
+                type: GET_DETAILS,
+                payload: json.data
+            })
+        } catch (e) {
+            console.log(e);
+        };
+    };
+};
+
+export function getDetailPromise(id) {
+    return function (dispatch) {
+        axios.get(`http://localhost:3001/pokemons/${id}`)
+        .then(res => res.data)
+        .then(res => dispatch({
+            type: GET_DETAILS,
+            payload: res
+        }))
+        .catch(err => console.log(err))
+    }
+}
+
+
+export const cleanDetail = (dispatch) => {
+    return dispatch({
+        type: CLEAN_DETAIL,
+        payload: []
+    })
+};
+
+export const postPokemon = (payload) => {
+    return async () => {
+        try {
+            var createPoke = await axios.post('http://localhost:3001/pokemons', payload);
+            console.log(createPoke);
+            alert('Your Pokemon is ON!!');
+            return createPoke;
+        } catch (e) {
+            alert('Pokemon name already exists')
+            console.log(e);
+        }
+    };
+};
+

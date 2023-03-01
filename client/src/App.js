@@ -1,58 +1,25 @@
-//configuracion de react router dom:
-import { Switch, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch} from "react-redux";
-import { LandingPage } from "./Pages/LandingPage/index";
-import { Details } from "./Pages/Details/Details.jsx";
-import { Create } from "./Pages/Create/Create.jsx";
-import { Team } from "./Pages/Team/Team.jsx";
-import { Pokemon } from "./components/Pokemon/Pokemon.jsx";
-import { NavBar } from "./components/NavBar/NavBar.jsx";
-//import { Cards } from "./components/Cards/Card";
-//import { Form } from "./components/Form/Form";
-import { getTypes, getPokemons } from "./actions";
+import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import LandingPage from './components/LandingPage/LandingPage';
+import Home from './components/Home/Home';
+import PokemonCreate from './components/PokemonCreate/PokemonCreate';
+import Detail from './components/Detail/Detail';
+import Error404 from './components/Error404/Error404';
 
-
-export default function App() {
-  const { pathname } = useLocation();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTypes());
-    dispatch(getPokemons());
-  });
-
-  //envuelvo toda mi app pasandole el browser router en un return
+function App() {
   return (
-    // <>
-    //   <NavBar />
-    //   <Route exact path="/">
-    //     <LandingPage />
-    //   </Route>
-    //   <Route exact path="/pokemon/:id">
-    //     <Pokemon />
-    //   </Route>
-    //   <Route exact path="/home">
-    //     <Details />
-    //   </Route>
-    //   <Route exact path="/create">
-    //     <Create />
-    //   </Route>
-    //   <Route exact path="/team">
-    //     <Team />
-    //   </Route>
-    // </>
-    //export default App;
-    
+    <BrowserRouter>
     <div className="App">
-      {pathname !== "/" && <NavBar/>}
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/home" component={Details} />
-        <Route exact path="/pokemon/:id" component={Pokemon} />
-        <Route exact path="/create" component={Create} />
-        <Route exact path="/team" component={Team} />
-    
-      </Switch>
+    <Switch>
+      <Route exact path='/' component={LandingPage} />
+      <Route exact path='/home' component={Home} />
+      <Route exact path='/create' component={PokemonCreate} />
+      <Route exact path='/pokemon/:id' component={Detail} />
+      <Route path='*' component={Error404}/>
+    </Switch>
     </div>
+    </BrowserRouter>
   );
 }
+
+export default App;
