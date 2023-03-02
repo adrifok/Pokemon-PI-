@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import { getAlltypes, filterCreated, orderName, filterType, filterStr } from "../../actions";
+import { getAlltypes, filterCreated, orderName, filterType, filterStr } from "../../actions"; 
 import SearchBar from "../SearchBar/SearchBar";
 import styles from './Filters.module.css'
 
@@ -67,7 +67,7 @@ const Filters =  ({setCurrentPage, setOrder}) => {
             }
         </select>
       </div>
-
+ 
       <div>
         <h4 className={styles.h4}>Order</h4>
         <select className={styles.select}>

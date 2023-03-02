@@ -47,7 +47,7 @@ export default function Home() {
                     <div className={styles.home}>
                         <div className={styles.filters}>
                             <Filters setCurrentPage={setCurrentPage} setOrder={setOrder} />
-                            <button className={styles.btn} onClick={e => {handleClick(e)}}>Clear filters</button>
+                            <button className={styles.btn} onClick={e => {handleClick(e)}}>clear filters</button>
                         </div>
                         <div>
                             <div>
